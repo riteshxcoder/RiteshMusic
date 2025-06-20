@@ -8,10 +8,10 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from youtubesearchpython.__future__ import VideosSearch
 
 import config
-from DeadlineTech import app
-from DeadlineTech.misc import _boot_
-from DeadlineTech.plugins.sudo.sudoers import sudoers_list
-from DeadlineTech.utils.database import (
+from RiteshMusic import app
+from RiteshMusic.misc import _boot_
+from RiteshMusic.plugins.sudo.sudoers import sudoers_list
+from RiteshMusic.utils.database import (
     add_served_chat,
     add_served_user,
     blacklisted_chats,
@@ -19,9 +19,9 @@ from DeadlineTech.utils.database import (
     is_banned_user,
     is_on_off,
 )
-from DeadlineTech.utils.decorators.language import LanguageStart
-from DeadlineTech.utils.formatters import get_readable_time
-from DeadlineTech.utils.inline import help_pannel, private_panel, start_panel
+from RiteshMusic.utils.decorators.language import LanguageStart
+from RiteshMusic.utils.formatters import get_readable_time
+from RiteshMusic.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
