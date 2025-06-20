@@ -26,7 +26,7 @@ from RiteshMusic.utils.database import (
     is_active_chat,
     is_maintenance,
 )
-from DeadlineTech.utils.inline import botplaylist_markup
+from RiteshMusic.utils.inline import botplaylist_markup
 from config import PLAYLIST_IMG_URL, SUPPORT_CHAT, adminlist
 from strings import get_string
 
