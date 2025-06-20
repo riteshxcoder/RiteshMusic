@@ -1,49 +1,3 @@
-import os
-import re
-import aiofiles
-import aiohttp
-from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
-from youtubesearchpython.__future__ import VideosSearch
-from config import YOUTUBE_IMG_URL
-
-# Constants
-CACHE_DIR = "cache"
-os.makedirs(CACHE_DIR, exist_ok=True)
-
-PANEL_W, PANEL_H = 763, 545
-PANEL_X = (1280 - PANEL_W) // 2
-PANEL_Y = 88
-TRANSPARENCY = 170
-INNER_OFFSET = 36
-
-THUMB_W, THUMB_H = 542, 273
-THUMB_X = PANEL_X + (PANEL_W - THUMB_W) // 2
-THUMB_Y = PANEL_Y + INNER_OFFSET
-
-TITLE_X = 377
-META_X = 377
-TITLE_Y = THUMB_Y + THUMB_H + 10
-META_Y = TITLE_Y + 45
-
-BAR_X, BAR_Y = 388, META_Y + 45
-BAR_RED_LEN = 280
-BAR_TOTAL_LEN = 480
-
-ICONS_W, ICONS_H = 415, 45
-ICONS_X = PANEL_X + (PANEL_W - ICONS_W) // 2
-ICONS_Y = BAR_Y + 48
-
-MAX_TITLE_WIDTH = 580
-
-def trim_to_width(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> str:
-    ellipsis = "…"
-    if font.getlength(text) <= max_w:
-        return text
-    for i in range(len(text) - 1, 0, -1):
-        if font.getlength(text[:i] + ellipsis) <= max_w:
-            return text[:i] + ellipsis
-    return ellipsis
-
 async def get_thumb(videoid: str) -> str:
     cache_path = os.path.join(CACHE_DIR, f"{videoid}_v4.png")
     if os.path.exists(cache_path):
@@ -95,8 +49,9 @@ async def get_thumb(videoid: str) -> str:
     try:
         title_font = ImageFont.truetype("RiteshMusic/assets/thumb/font2.ttf", 32)
         regular_font = ImageFont.truetype("RiteshMusic/assets/thumb/font.ttf", 18)
+        watermark_font = ImageFont.truetype("RiteshMusic/assets/thumb/font2.ttf", 20)
     except OSError:
-        title_font = regular_font = ImageFont.load_default()
+        title_font = regular_font = watermark_font = ImageFont.load_default()
 
     thumb = base.resize((THUMB_W, THUMB_H))
     tmask = Image.new("L", thumb.size, 0)
@@ -110,7 +65,6 @@ async def get_thumb(videoid: str) -> str:
     draw.line([(BAR_X, BAR_Y), (BAR_X + BAR_RED_LEN, BAR_Y)], fill="red", width=6)
     draw.line([(BAR_X + BAR_RED_LEN, BAR_Y), (BAR_X + BAR_TOTAL_LEN, BAR_Y)], fill="gray", width=5)
     draw.ellipse([(BAR_X + BAR_RED_LEN - 7, BAR_Y - 7), (BAR_X + BAR_RED_LEN + 7, BAR_Y + 7)], fill="red")
-
     draw.text((BAR_X, BAR_Y + 15), "00:00", fill="black", font=regular_font)
     end_text = "Live" if is_live else duration_text
     draw.text((BAR_X + BAR_TOTAL_LEN - (90 if is_live else 60), BAR_Y + 15), end_text, fill="red" if is_live else "black", font=regular_font)
@@ -122,6 +76,16 @@ async def get_thumb(videoid: str) -> str:
         r, g, b, a = ic.split()
         black_ic = Image.merge("RGBA", (r.point(lambda *_: 0), g.point(lambda *_: 0), b.point(lambda *_: 0), a))
         bg.paste(black_ic, (ICONS_X, ICONS_Y), black_ic)
+
+    # ✅ Watermark
+    watermark_text = "⟶̽ जय श्री ༢།म >𝟑🙏🚩"
+    text_size = draw.textsize(watermark_text, font=watermark_font)
+    x = bg.width - text_size[0] - 25
+    y = bg.height - text_size[1] - 25
+    glow_pos = [(x + dx, y + dy) for dx in (-1, 1) for dy in (-1, 1)]
+    for pos in glow_pos:
+        draw.text(pos, watermark_text, font=watermark_font, fill=(0, 0, 0, 180))
+    draw.text((x, y), watermark_text, font=watermark_font, fill=(255, 255, 255, 240))
 
     # Cleanup and save
     try:
