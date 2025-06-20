@@ -1,6 +1,7 @@
+#⟶̽ जय श्री ༢།म >𝟑🙏🚩
 from pyrogram.types import InlineKeyboardButton, WebAppInfo
 import config
-from DeadlineTech import app
+from RiteshMusic import app
 
 def start_panel(_):
     buttons = [
@@ -14,7 +15,7 @@ def start_panel(_):
         [
             InlineKeyboardButton(
                 text=_["S_B_5"],
-                url="https://github.com/DeadlineTech/music"
+                url="https://github.com/riteshxcoder/RiteshMusic"
             )
         ]
     ]
@@ -39,8 +40,8 @@ def private_panel(_):
             InlineKeyboardButton(text=_["S_B_7"], url=config.SUPPORT_CHANNEL)
         ],
         [
-            InlineKeyboardButton(text=_["S_B_6"], web_app=WebAppInfo(url="https://vps-kappa.vercel.app")), 
-            InlineKeyboardButton(text=_["S_B_5"], url="https://github.com/DeadlineTech/music")
+            InlineKeyboardButton(text=_["S_B_6"], web_app=WebAppInfo(url="https://yourshivang.netlify.app")), 
+            InlineKeyboardButton(text=_["S_B_5"], url="https://github.com/riteshxcoder/RiteshMusic")
         ]
     ]
     return buttons
