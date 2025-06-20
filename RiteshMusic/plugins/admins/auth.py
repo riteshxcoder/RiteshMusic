@@ -10,8 +10,8 @@ from RiteshMusic.utils.database import (
     get_authuser_names,
     save_authuser,
 )
-from DeadlineTech.utils.decorators import AdminActual, language
-from DeadlineTech.utils.inline import close_markup
+from RiteshMusic.utils.decorators import AdminActual, language
+from RiteshMusic.utils.inline import close_markup
 from config import BANNED_USERS, adminlist
 
 
