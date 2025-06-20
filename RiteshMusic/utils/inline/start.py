@@ -1,47 +1,79 @@
-#⟶̽ जय श्री ༢།म >𝟑🙏🚩
-from pyrogram.types import InlineKeyboardButton, WebAppInfo
+from pyrogram.types import InlineKeyboardButton
+
+
+
 import config
+
 from RiteshMusic import app
 
+
+
+
+
 def start_panel(_):
+
     buttons = [
+
         [
+
             InlineKeyboardButton(
-                text=_["S_B_1"],
-                url=f"https://t.me/{app.username}?startgroup=true"
-            ), 
-            InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT)
+
+                text=_["S_B_1"], url=f"https://t.me/{app.username}?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users+"
+
+            ),
+
+            InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_GROUP),
+
         ],
-        [
-            InlineKeyboardButton(
-                text=_["S_B_5"],
-                url="https://github.com/riteshxcoder/RiteshMusic"
-            )
-        ]
+
     ]
+
     return buttons
 
 
+
+
+
 def private_panel(_):
+
     buttons = [
+
         [
+
             InlineKeyboardButton(
+
                 text=_["S_B_3"],
-                url=f"https://t.me/{app.username}?startgroup=true"
+
+                url=f"https://t.me/{app.username}?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users+",
+
             )
-        ],
-        [
-            InlineKeyboardButton(text=_["S_B_10"], user_id=config.OWNER_ID), 
-            InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper")
+
         ],
 
         [
-            InlineKeyboardButton(text=_["S_B_9"], url=config.SUPPORT_CHAT),
-            InlineKeyboardButton(text=_["S_B_7"], url=config.SUPPORT_CHANNEL)
+
+            InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
+
+            InlineKeyboardButton(text=_["S_B_7"], callback_data="gib_source"),
+
         ],
+
         [
-            InlineKeyboardButton(text=_["S_B_6"], web_app=WebAppInfo(url="http://yourshivang.netlify.app")), 
-            InlineKeyboardButton(text=_["S_B_5"], url="https://github.com/riteshxcoder/RiteshMusic")
-        ]
+
+            InlineKeyboardButton(text=_["S_B_5"], user_id=config.OWNER_ID),
+
+            InlineKeyboardButton("𝐁σт 𝐈иғσ", callback_data="bot_info_data"),
+
+        ],
+
+        [
+
+            InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_GROUP),
+
+            InlineKeyboardButton(text=_["S_B_6"], url=config.SUPPORT_CHANNEL),
+
+        ],
+
     ]
+
     return buttons
