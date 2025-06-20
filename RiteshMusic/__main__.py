@@ -80,7 +80,7 @@ async def init():
     try:
         await Anony.stream_call("https://files.catbox.moe/g93qe8.jpg")
     except NoActiveGroupCall:
-        LOGGER("DeadlineTech").error(
+        LOGGER("RiteshMusic").error(
             "Please turn on the videochat of your log group\channel.\n\nStopping Bot..."
         )
         exit()
@@ -93,7 +93,7 @@ async def init():
     await idle()
     await app.stop()
     await userbot.stop()
-    LOGGER("DeadlineTech").info("Stopping RiteshMusic Music Bot...")
+    LOGGER("RiteshMusic").info("Stopping RiteshMusic Music Bot...")
 
 
 if __name__ == "__main__":
