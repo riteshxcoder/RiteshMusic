@@ -74,7 +74,7 @@ async def init():
     
     for all_module in ALL_MODULES:
         importlib.import_module("RiteshMusic.plugins" + all_module)
-    LOGGER("DeadlineTech.plugins").info("Successfully Imported Modules...")
+    LOGGER("RiteshMusic.plugins").info("Successfully Imported Modules...")
     await userbot.start()
     await Anony.start()
     try:
@@ -87,8 +87,8 @@ async def init():
     except:
         pass
     await Anony.decorators()
-    LOGGER("DeadlineTech").info(
-        "RiteshMusic Music Bot started successfully"
+    LOGGER("RiteshMusic").info(
+        "RiteshMusic ⚠️ An unexpected error occurred during startup. Bot started successfully"
     )
     await idle()
     await app.stop()
